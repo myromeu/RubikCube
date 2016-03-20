@@ -14,5 +14,9 @@ int main()
     cout << rubi;
     rubi.rotate_row(3, c_w);
     cout << rubi;
+
+
+    rubi.shuffle();
+    cout << rubi;
     return 0;
 }

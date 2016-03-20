@@ -136,7 +136,32 @@ RubikCube::~RubikCube()
 
 void RubikCube::shuffle()
 {
+    std::srand(std::time(nullptr));
 
+    for (int i(0); i < (std::rand() % 35 + 25); i++)
+    {
+        switch(std::rand() % 4)
+        {
+            case 0: set_down(); break;
+            case 1: set_left(); break;
+            case 2: set_up(); break;
+            case 3: set_right(); break;
+        }
+
+        int sd = std::rand() % 70;
+        int n = std::rand() % 3 + 1; /// num of col or row
+        rotate dir = rotate(std::rand() % 2);
+        if (sd > 40) rotate_row(n, dir);
+        else rotate_col(n, dir);
+    }
+
+    switch(std::rand() % 4)
+    {
+        case 0: set_down(); break;
+        case 1: set_left(); break;
+        case 2: set_up(); break;
+        case 3: set_right(); break;
+    }
 }
 
 void RubikCube::set_up()
@@ -170,13 +195,29 @@ void RubikCube::rotate_col(int x, rotate r)
     else if (x == 0)
     {
         swap_col(x, r);
-        front->flanks.left->rotate_clockwise();
+        switch (r)
+        {
+        case c_w:
+            front->flanks.left->rotate_clockwise();
+        break;
+        case counter_c_w:
+            front->flanks.left->rotate_counter_clockwise();
+        break;
+        }
         steps++;
     }
     else if (x == 2)
     {
         swap_col(x, r);
-        front->flanks.right->rotate_counter_clockwise();
+        switch (r)
+        {
+        case c_w:
+            front->flanks.right->rotate_counter_clockwise();
+        break;
+        case counter_c_w:
+            front->flanks.right->rotate_clockwise();
+        break;
+        }
         steps++;
     }
 
@@ -195,13 +236,28 @@ void RubikCube::rotate_row(int x, rotate r)
     else if (x == 0)
     {
         swap_row(x, r);
-        front->flanks.up->rotate_clockwise();
+        switch (r)
+        {
+        case c_w:
+            front->flanks.up->rotate_clockwise();
+        break;
+        case counter_c_w:
+            front->flanks.up->rotate_counter_clockwise();
+        break;
+        }
         steps++;
     }
     else if (x == 2)
     {
         swap_row(x, r);
-        front->flanks.down->rotate_counter_clockwise();
+        switch (r)
+        {
+        case c_w:
+            front->flanks.down->rotate_counter_clockwise();
+        break;
+        case counter_c_w:
+            front->flanks.down->rotate_clockwise();
+        }
         steps++;
     }
 
