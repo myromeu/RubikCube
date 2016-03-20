@@ -4,13 +4,15 @@ using namespace std;
 
 int main()
 {
-	RubikCube rubi = RubikCube();
-	cout << rubi;
-	rubi.rotate_col(1);
-	cout << rubi;
-	rubi.set_down();
-	cout << rubi;
-	rubi.rotate_row(3);
-	cout << rubi;
-	return 0;
+    RubikCube rubi = RubikCube();
+    cout << rubi;
+    rubi.rotate_col(1, c_w);
+    cout << rubi;
+    rubi.set_down();
+    cout << rubi;
+    rubi.rotate_row(3, counter_c_w);
+    cout << rubi;
+    rubi.rotate_row(3, c_w);
+    cout << rubi;
+    return 0;
 }
